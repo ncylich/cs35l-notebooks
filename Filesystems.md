@@ -272,13 +272,23 @@ rw-r--r--
 
 The permissions bits are just a 9-bit number, which stores 3 groups of octal numbers representing the `rwx` permission bits for the `ugo` (owner, group, other) of the file. The flags displayed with `ls -l` have ten bits, with the leading bit representing the **file type**:
 
-| Bit | File Type         |
-| --- | ----------------- |
-| -   | regular           |
-| d   | directory         |
-| l   | symbolic link     |
-| c   | char special file |
-| ... | ...               |
+| First Bit | File Type         |
+| --------- | ----------------- |
+| -         | regular           |
+| d         | directory         |
+| l         | symbolic link     |
+| c         | char special file |
+| ...       | ...               |
+
+**r** - read
+**w** - write
+**x** - execute
+
+**Special Bits**
+**s** - Setuid: execute with that UGO's permissions
+**S** - Setuid no x: executes with the UGO's permissions, but the UGO cannot execute it. Same effect as "s-" in "rws-"
+**t** - Sitcky bit: cannot be deleted by non-owners
+**T** - Sticy bit no x: sticky bit without execute permission
 
 | **Permission** | **Octal** |
 | -------------- | --------- |
@@ -303,8 +313,61 @@ $ chmod +s /bin/sh
 chmod: changing permissions of 'bin/sh': Operation not permitted
 ```
 
+### Symbolic Mode
+Uses letters and operators to modify permissions:
 
-### Sensible Permissions
+#### Who (users)
+- **u**: User/owner
+- **g**: Group
+- **o**: Others
+- **a**: All users
+
+#### Operators
+- **+**: Add permission
+- **-**: Remove permission
+- **=**: Set exact permission
+
+#### Permissions
+- **r**: Read
+- **w**: Write
+- **x**: Execute
+
+Examples:
+```bash
+chmod u+x script.sh     # Add execute permission for owner
+chmod g+rw file.txt     # Add read and write for group
+chmod o-rwx file.txt    # Remove all permissions for others
+chmod a+r document.pdf  # Add read permission for everyone
+```
+
+### Recursive Option
+Use `-R` or `--recursive` to apply permissions to directories and their contents:
+```bash
+chmod -R 755 directory/
+```
+
+### Common Use Cases
+```bash
+# Make a script executable
+chmod u+x script.sh
+
+# Set typical file permissions
+chmod 644 file.txt
+
+# Set typical directory permissions
+chmod 755 directory/
+
+# Remove write permission for group and others
+chmod go-w file.txt
+```
+
+### Special Permissions
+- **SUID (4000)**: `chmod u+s file`
+- **SGID (2000)**: `chmod g+s file`
+- **Sticky Bit (1000)**: `chmod +t directory`
+
+
+## Sensible Permissions
 
 
 <!-- This was originally part of the midterm review in week4.md. -->
