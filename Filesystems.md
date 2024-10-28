@@ -280,6 +280,14 @@ The permissions bits are just a 9-bit number, which stores 3 groups of octal num
 | c   | char special file |
 | ... | ...               |
 
+| **Permission** | **Octal** |
+| -------------- | --------- |
+| rwx            | 7         |
+| rw-            | 6         |
+| r-x            | 5         | 
+| r--            | 4         |
+| ---            | 0         |
+
 Technically, the 9 bits are actually 12 bits because they are encoded in a way to allow for the special flag:
 
 ```console
