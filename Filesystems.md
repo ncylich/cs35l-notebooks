@@ -281,14 +281,22 @@ The permissions bits are just a 9-bit number, which stores 3 groups of octal num
 | ...       | ...               |
 
 **r** - read
+
 **w** - write
+
 **x** - execute
 
+
 **Special Bits**
+
 **s** - Setuid: execute with that UGO's permissions
+
 **S** - Setuid no x: executes with the UGO's permissions, but the UGO cannot execute it. Same effect as "s-" in "rws-"
+
 **t** - Sitcky bit: cannot be deleted by non-owners, added at end of permissions string
+
 **T** - Sticy bit no x: sticky bit without execute permission
+
 
 | **Permission** | **Octal** |
 | -------------- | --------- |
