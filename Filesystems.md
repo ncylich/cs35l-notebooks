@@ -99,6 +99,10 @@ Hard links work because a directory is simply a *mapping* of file name component
 
 **Soft link (symbolic links)** on the other hand are actual separate data structures that have content (the string that is interpreted as the path to their target). A hard link only contributes to the directory size (expands the mapping by one entry). The underlying file remains unchanged.
 
+```shell
+ln -s a b
+```
+
 Symbolic links can also point to nowhere. They can be **dangling**. When using such a pointer, the OS will try to resolve the existing path that's saved as the content of its file, but if that file no longer exists, then you get the error:
 
 ```console
